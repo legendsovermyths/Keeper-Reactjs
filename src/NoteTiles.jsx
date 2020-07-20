@@ -1,11 +1,12 @@
 import React from "react"
-function Tiles(){
+
+function Tiles(props){
   return <div class="note">
   <h1>
-  This is note titles.
+  {props.title}
   </h1>
   <p>
-  This is note content.
+  {props.content}
   </p>
   </div>
 }
