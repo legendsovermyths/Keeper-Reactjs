@@ -1,21 +1,18 @@
-import React from "react"
-import Header from "./Header"
-import Footer from "./Footer"
-import Tiles from "./NoteTiles"
-import notes from "./notes.js"
-function CreateTiles(note){
-  return <Tiles
-  key={note.id}
-  title={note.title}
-  content={note.content}
-  />
-}
-function App(){
-  return <div>
-  <Header/>
-  {notes.map(CreateTiles)}
-  <Footer/>
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import Note from "./Note";
+import CreateArea from "./NoteTiles";
 
-  </div>
+function App() {
+  return (
+    <div>
+      <Header />
+      <CreateArea />
+      <Note key={1} title="Note title" content="Note content" />
+      <Footer />
+    </div>
+  );
 }
-export default App
+
+export default App;

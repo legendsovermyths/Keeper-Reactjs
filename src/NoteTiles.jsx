@@ -1,13 +1,15 @@
-import React from "react"
+import React from "react";
 
-function Tiles(props){
-  return <div class="note">
-  <h1>
-  {props.title}
-  </h1>
-  <p>
-  {props.content}
-  </p>
-  </div>
+function CreateArea() {
+  return (
+    <div>
+      <form>
+        <input name="title" placeholder="Title" />
+        <textarea name="content" placeholder="Take a note..." rows="3" />
+        <button>Add</button>
+      </form>
+    </div>
+  );
 }
-export default Tiles
+
+export default CreateArea;
