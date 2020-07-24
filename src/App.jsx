@@ -1,15 +1,38 @@
-import React from "react";
+import React,{useState}from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
-import CreateArea from "./NoteTiles";
+import CreateArea from "./CreateArea";
 
 function App() {
+  let [notesContent,changeNotesContent]=useState([{
+    title:"Note title",
+    content:"Note content"
+  }])
+  var notetitle
+  var notecontent
+  function makeNote(notesContent,index){
+  return  <Note title={notesContent.title} content={notesContent.content} key={index}/>
+  }
+  function handleTitleChange(event){
+    notetitle=event.target.value
+  }
+  function handleContentChange(event){
+    notecontent=event.target.value
+  }
+  function handleClick(e){
+     e.preventDefault()
+     changeNotesContent([...notesContent,{
+       title:notetitle,
+       content:notecontent}])
+  }
   return (
     <div>
       <Header />
-      <CreateArea />
-      <Note key={1} title="Note title" content="Note content" />
+      <CreateArea onTitleChange={handleTitleChange} onContentChange={handleContentChange} onClick={handleClick}/>
+      {notesContent.map(function(noteContent,index){
+        return makeNote(noteContent,index)
+      })}
       <Footer />
     </div>
   );
