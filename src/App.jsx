@@ -12,7 +12,12 @@ function App() {
   var notetitle
   var notecontent
   function makeNote(notesContent,index){
-  return  <Note title={notesContent.title} content={notesContent.content} key={index}/>
+  return  <Note title={notesContent.title} content={notesContent.content} key={index} onClick={()=>handleDelete(index)}/>
+  }
+  function handleDelete(key){
+    changeNotesContent(prevValue=>{
+      return prevValue.filter((item,index)=>{ return index!==key;})
+    })
   }
   function handleTitleChange(event){
     notetitle=event.target.value
