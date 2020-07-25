@@ -5,6 +5,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
+  var [bool,changeBool]=useState(false)
   let [notesContent,changeNotesContent]=useState([{
     title:"Note title",
     content:"Note content"
@@ -31,10 +32,14 @@ function App() {
        title:notetitle,
        content:notecontent}])
   }
+  function handleFocus(){
+    changeBool(bool=!bool)
+  }
+
   return (
     <div>
       <Header />
-      <CreateArea onTitleChange={handleTitleChange} onContentChange={handleContentChange} onClick={handleClick}/>
+      <CreateArea onFocus={handleFocus} focus={bool} onTitleChange={handleTitleChange} onContentChange={handleContentChange} onClick={handleClick}/>
       {notesContent.map(function(noteContent,index){
         return makeNote(noteContent,index)
       })}
