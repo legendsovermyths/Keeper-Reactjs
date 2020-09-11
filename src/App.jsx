@@ -1,47 +1,68 @@
-import React,{useState}from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  var [bool,changeBool]=useState(false)
-  let [notesContent,changeNotesContent]=useState([{
-    title:"Note title",
-    content:"Note content"
-  }])
-  var notetitle
-  var notecontent
-  function makeNote(notesContent,index){
-  return  <Note title={notesContent.title} content={notesContent.content} key={index} onClick={()=>handleDelete(index)}/>
+  var [bool, changeBool] = useState(false);
+  let [notesContent, changeNotesContent] = useState([
+    {
+      title: "Note title",
+      content: "Note content",
+    },
+  ]);
+  var notetitle;
+  var notecontent;
+  function makeNote(notesContent, index) {
+    return (
+      <Note
+        title={notesContent.title}
+        content={notesContent.content}
+        key={index}
+        onClick={() => handleDelete(index)}
+      />
+    );
   }
-  function handleDelete(key){
-    changeNotesContent(prevValue=>{
-      return prevValue.filter((item,index)=>{ return index!==key;})
-    })
+  function handleDelete(key) {
+    changeNotesContent((prevValue) => {
+      return prevValue.filter((item, index) => {
+        return index !== key;
+      });
+    });
   }
-  function handleTitleChange(event){
-    notetitle=event.target.value
+  function handleTitleChange(event) {
+    notetitle = event.target.value;
   }
-  function handleContentChange(event){
-    notecontent=event.target.value
+  function handleContentChange(event) {
+    notecontent = event.target.value;
   }
-  function handleClick(e){
-     e.preventDefault()
-     changeNotesContent([...notesContent,{
-       title:notetitle,
-       content:notecontent}])
+  function handleClick(e) {
+    e.preventDefault();
+    changeNotesContent([
+      ...notesContent,
+      {
+        title: notetitle,
+        content: notecontent,
+      },
+    ]);
   }
-  function handleFocus(){
-    changeBool(bool=!bool)
+  function handleFocus() {
+    changeBool((bool = !bool));
   }
 
   return (
     <div>
       <Header />
-      <CreateArea onFocus={handleFocus} focus={bool} onTitleChange={handleTitleChange} onContentChange={handleContentChange} onClick={handleClick}/>
-      {notesContent.map(function(noteContent,index){
-        return makeNote(noteContent,index)
+      <CreateArea
+        onFocus={handleFocus}
+        focus={bool}
+        onTitleChange={handleTitleChange}
+        onContentChange={handleContentChange}
+        onClick={handleClick}
+      />
+      {notesContent.map(function (noteContent, index) {
+        return makeNote(noteContent, index);
       })}
       <Footer />
     </div>
